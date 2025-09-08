@@ -1,0 +1,79 @@
+<%= form_with(model: task) do |form| %>
+  <% if task.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+      <ul>
+        <% task.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, "Nome da Tarefa:", style: "display: block; color: #007AA2;" %>
+    <%= form.text_field :name, style: "margin-bottom: 20px; width: 100%;"%>
+  </div>
+
+  <div id="date" style="display: flex; justify-content: center;">
+    <div style="width: 50%;">
+      <%= form.label :beginning, "Ínicio:", style: "width: 100%; display: block; color: #007AA2; text-align: center; background-color: #d8d8d8ff; border: 1px solid black;"%>
+      <%= form.date_field :beginning, style: "width: 100%; margin-bottom: 20px;" %>
+    </div>
+
+    <div style="width: 50%;"> 
+      <%= form.label :end, "Conclusão:", style: "width: 100%; display: block; color: #007AA2; text-align: center; background-color: #d8d8d8ff; border: 1px solid black;" %>
+      <%= form.date_field :end, style: "width: 100%; margin-bottom: 20px;" %>
+    </div>
+  </div>
+
+  <div id="status" style="display: flex; justify-content: space-between; gap:20px;">
+    <div>
+      <div>
+        <%= form.label :estimated_cost, "Custo Estimado (R$):", style: "display: block; color: #007AA2;" %>
+        <%= form.text_field :estimated_cost, style: "margin-bottom: 50px; width: 50%;" %>
+      </div>
+    </div>
+  
+    <div>
+      <div>
+        <%= form.label :status, "Status da Tarefa:", style: "display: block; color: #007AA2;" %>
+        <%= form.select :status, ["Concluída", "Pendente", "Em andamento"], { prompt: " " }, style: "margin-bottom: 50px; width: 100%;" %>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; justify-content: flex-end;">
+    <div id="back">
+      <button type="button" style="display: flex; background: none; border: none;" data-bs-dismiss="modal">
+        <%= image_tag "back.png", alt: "back", style: "height: 25px; width: 25px;" %>
+        <p>Voltar</p>
+      </button>
+    </div>
+    <div class="btn-group">
+      <% if task.persisted? %>
+        <div id="delete" data-bs-toggle="dropdown" aria-expanded="false" style="display: flex;">
+            <%= image_tag "trash.png", alt: "delete", style: "height: 25px; width: 25px;" %>
+            <p>Deletar</p>
+        </div>
+
+        <ul class="dropdown-menu p-3" style="min-width: 200px;">
+        <li><strong>Tem certeza?</strong></li>
+        <li class="mt-2 d-flex justify-content-between">
+          <%= link_to "Sim", task_path(task), class: "btn btn-secondary btn-sm", data: { turbo_method: :delete }, style: "display: flex; gap: 5px;" %>
+          <%= link_to "Não", "#", class: "btn btn-secondary btn-sm", data: { bs_toggle: "dropdown" } %>
+        </li>
+      </ul>
+      <% end %>
+    </div>
+    <div id="save">
+      <%= form.button type: "submit", style: "background: none; border: none; display: flex;" do %>
+        <%= image_tag "save.png", alt: "save", style: "height: 25px; width: 25px;" %>
+        <p>Salvar</p>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+
