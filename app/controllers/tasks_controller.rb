@@ -31,9 +31,11 @@ class TasksController < ApplicationController
           date: Date.today,
           task_id: @task.id
         )
+        format.turbo_stream
         format.html { redirect_to tasks_path, notice: "Task was successfully created." }
         format.json { render :show, status: :created, location: tasks_path }
       else
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("new_task", partial: "tasks/form", locals: { task: @task }) }
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
@@ -44,9 +46,11 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
+        format.turbo_stream
         format.html { redirect_to tasks_path, notice: "Task was successfully updated.", status: :see_other }
         format.json { render :show, status: :ok, location: @task }
       else
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("edit_task_#{@task.id}", partial: "tasks/form", locals: { task: @task }) }
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
@@ -55,9 +59,11 @@ class TasksController < ApplicationController
 
   # DELETE /tasks/1 or /tasks/1.json
   def destroy
+    Commentary.where(task_id: @task.id).destroy_all
     @task.destroy!
 
     respond_to do |format|
+      format.turbo_stream
       format.html { redirect_to tasks_path, notice: "Task was successfully destroyed.", status: :see_other }
       format.json { head :no_content }
     end

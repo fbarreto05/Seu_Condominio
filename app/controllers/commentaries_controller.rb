@@ -22,12 +22,15 @@ class CommentariesController < ApplicationController
   # POST /commentaries or /commentaries.json
   def create
     @commentary = Commentary.new(commentary_params)
-
+    @task = Task.find(@commentary.task_id)
+    
     respond_to do |format|
       if @commentary.save
+        format.turbo_stream
         format.html { redirect_to tasks_path, notice: "Commentary was successfully created." }
         format.json { render :show, status: :created, location: @commentary }
       else
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("new_commentary", partial: "commentaries/form", locals: { commentary: @commentary }) }
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @commentary.errors, status: :unprocessable_entity }
       end
@@ -52,6 +55,7 @@ class CommentariesController < ApplicationController
     @commentary.destroy!
 
     respond_to do |format|
+      format.turbo_stream
       format.html { redirect_to tasks_path, notice: "Commentary was successfully destroyed.", status: :see_other }
       format.json { head :no_content }
     end

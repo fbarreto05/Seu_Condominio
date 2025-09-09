@@ -1,31 +1,33 @@
-<%= form_with(model: commentary) do |form| %>
-  <% if commentary.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(commentary.errors.count, "error") %> prohibited this commentary from being saved:</h2>
+<%= turbo_frame_tag "new_commentary" do %>
+  <%= form_with(model: commentary) do |form| %>
+    <% if commentary.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(commentary.errors.count, "error") %> prohibited this commentary from being saved:</h2>
 
-      <ul>
-        <% commentary.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div >
-    <%= form.textarea :text, style: "background-color: #d8d8d8ff; width: 100%" %>
-  </div>
-
-  <%= form.hidden_field :task_id, value: task.id %>
-  <%= form.hidden_field :date, value: Date.today %>
-  <%= form.hidden_field :name, value: "Rodrigo" %>
-
-  <div id="save" style="display: flex; justify-content: flex-end;">
-      <div class="imagem-container" style="box-shadow: 0 4px 6px rgba(0,0,0,0.3); background: linear-gradient(to top, #005f7a, #00CFFF); background-color: #007AA2; height: 36px; width: 36px; display: flex; justify-content: center; align-items: center; border-top-right-radius: 0px; border-bottom-right-radius: 0px;">
-        <%= form.button type: "submit", style: "background: none; border: none; display: flex; justify-content: flex-end;" do %>
-          <%= image_tag "email.png", alt: "save", style: "height: 28px; width: 28px;" %>
-        <% end %>
+        <ul>
+          <% commentary.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
       </div>
-      <p style="box-shadow: 0 4px 6px rgba(0,0,0,0.3); border: 1px solid black; padding: 5px; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">Enviar Comentário</p> 
-  </div>
+    <% end %>
 
+    <div >
+      <%= form.textarea :text, style: "background-color: #d8d8d8ff; width: 100%" %>
+    </div>
+
+    <%= form.hidden_field :task_id, value: task.id %>
+    <%= form.hidden_field :date, value: Date.today %>
+    <%= form.hidden_field :name, value: "Rodrigo" %>
+
+    <div id="save" style="display: flex; justify-content: flex-end;">
+        <div class="imagem-container" style="box-shadow: 0 4px 6px rgba(0,0,0,0.3); background: linear-gradient(to top, #005f7a, #00CFFF); background-color: #007AA2; height: 36px; width: 36px; display: flex; justify-content: center; align-items: center; border-top-right-radius: 0px; border-bottom-right-radius: 0px;">
+          <%= form.button type: "submit", style: "background: none; border: none; display: flex; justify-content: flex-end;" do %>
+            <%= image_tag "email.png", alt: "save", style: "height: 28px; width: 28px;" %>
+          <% end %>
+        </div>
+        <p style="box-shadow: 0 4px 6px rgba(0,0,0,0.3); border: 1px solid black; padding: 5px; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">Enviar Comentário</p> 
+    </div>
+
+  <% end %>
 <% end %>
