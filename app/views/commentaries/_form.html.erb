@@ -12,7 +12,7 @@
   <% end %>
 
   <div >
-    <%= form.textarea :text, style: "width: 100%" %>
+    <%= form.textarea :text, style: "background-color: #d8d8d8ff; width: 100%" %>
   </div>
 
   <%= form.hidden_field :task_id, value: task.id %>
@@ -20,10 +20,12 @@
   <%= form.hidden_field :name, value: "Rodrigo" %>
 
   <div id="save" style="display: flex; justify-content: flex-end;">
-    <%= form.button type: "submit", style: "background: none; border: none; display: flex; justify-content: flex-end;" do %>
-      <%= image_tag "email.png", alt: "save", style: "height: 25px; width: 25px;" %>
-      <p>Enviar Comentário</p>
-    <% end %>
+      <div class="imagem-container" style="background-color: #007AA2; height: 36px; width: 36px; display: flex; justify-content: center; align-items: center;">
+        <%= form.button type: "submit", style: "background: none; border: none; display: flex; justify-content: flex-end;" do %>
+          <%= image_tag "email.png", alt: "save", style: "height: 28px; width: 28px;" %>
+        <% end %>
+      </div>
+      <p style="border: 1px solid black; padding: 5px;">Enviar Comentário</p> 
   </div>
 
 <% end %>

@@ -11,67 +11,136 @@
     </div>
   <% end %>
 
+  <style>
+          .select-wrapper {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+      }
+
+      .select-wrapper select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        padding-right: 50px; 
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+      }
+
+      .select-wrapper::after {
+        content: "▼";
+        color: white;
+        font-size: 14px;
+        background: #007AA2;
+        padding: 6px 10px;     
+        border-radius: 0 4px 4px 0; 
+        
+        position: absolute;
+        top: 0;          
+        bottom: 0;      
+        right: 0;        
+        display: flex;       
+        align-items: center;
+        pointer-events: none;
+      }
+
+  </style>
+
   <div>
     <%= form.label :name, "Nome da Tarefa:", style: "display: block; color: #007AA2;" %>
-    <%= form.text_field :name, style: "margin-bottom: 20px; width: 100%;"%>
+    <%= form.text_field :name, style: "background-color: #d8d8d8ff; margin-bottom: 20px; width: 100%;"%>
   </div>
 
   <div id="date" style="display: flex; justify-content: center;">
     <div style="width: 50%;">
       <%= form.label :beginning, "Ínicio:", style: "width: 100%; display: block; color: #007AA2; text-align: center; background-color: #d8d8d8ff; border: 1px solid black;"%>
-      <%= form.date_field :beginning, style: "width: 100%; margin-bottom: 20px;" %>
+      <%= form.date_field :beginning, style: "background-color: #d8d8d8ff; width: 100%; margin-bottom: 20px;" %>
     </div>
 
     <div style="width: 50%;"> 
       <%= form.label :end, "Conclusão:", style: "width: 100%; display: block; color: #007AA2; text-align: center; background-color: #d8d8d8ff; border: 1px solid black;" %>
-      <%= form.date_field :end, style: "width: 100%; margin-bottom: 20px;" %>
+      <%= form.date_field :end, style: "background-color: #d8d8d8ff; width: 100%; margin-bottom: 20px;" %>
     </div>
   </div>
 
-  <div id="status" style="display: flex; justify-content: space-between; gap:20px;">
+  <div id="status" style="display: flex; justify-content: space-between; gap:10px;">
     <div>
-      <div>
+      <div style="">
+        
         <%= form.label :estimated_cost, "Custo Estimado (R$):", style: "display: block; color: #007AA2;" %>
-        <%= form.text_field :estimated_cost, style: "margin-bottom: 50px; width: 50%;" %>
+        
+      </div>
+      <div style="display: flex;">
+        <div class="imagem-container" style="background-color: #007AA2; height: 30px; width: 30px; display: flex; justify-content: center; align-items: center;">
+            <p style="color: white">R$</p>
+        </div>
+        <%= form.text_field :estimated_cost, style: "background-color: #d8d8d8ff;  margin-bottom: 50px; width: 50%;" %>
       </div>
     </div>
   
     <div>
       <div>
         <%= form.label :status, "Status da Tarefa:", style: "display: block; color: #007AA2;" %>
-        <%= form.select :status, ["Concluída", "Pendente", "Em andamento"], { prompt: " " }, style: "margin-bottom: 50px; width: 100%;" %>
+        <div class="select-wrapper">
+          <%= form.select :status, ["Concluída", "Pendente", "Em andamento"], { prompt: " " }, style: "background-color: #d8d8d8ff; width: 100%;" %>
+        </div>
       </div>
     </div>
   </div>
 
-  <div style="display: flex; justify-content: flex-end;">
-    <div id="back">
-      <button type="button" style="display: flex; background: none; border: none;" data-bs-dismiss="modal">
-        <%= image_tag "back.png", alt: "back", style: "height: 25px; width: 25px;" %>
-        <p>Voltar</p>
-      </button>
+  <div style="display: flex; justify-content: flex-end; gap:2px;">
+    <div id="back" style="display: flex;">
+      <div class="imagem-container" style="background-color: #007AA2; height: 30px; width: 30px; display: flex; justify-content: center; align-items: center;">
+        <button type="button" style="display: flex; background: none; border: none;" data-bs-dismiss="modal">
+          <%= image_tag "back.png", alt: "back", style: "height: 25px; width: 25px;" %>
+        </button>
+      </div>
+      <p style="border: 1px solid black;">Voltar</p>
     </div>
     <div class="btn-group">
       <% if task.persisted? %>
         <div id="delete" data-bs-toggle="dropdown" aria-expanded="false" style="display: flex;">
-            <%= image_tag "trash.png", alt: "delete", style: "height: 25px; width: 25px;" %>
-            <p>Deletar</p>
+          <div class="imagem-container" style="background-color: #dd2d01ff; height: 30px; width: 30px; display: flex; justify-content: center; align-items: center;">
+            <button type="button" style="display: flex; background: none; border: none;">
+              <%= image_tag "trash.png", alt: "delete", style: "height: 25px; width: 25px;" %>
+            </button>
+          </div>
+            <p style="border: 1px solid black;">Deletar</p>
         </div>
 
-        <ul class="dropdown-menu p-3" style="min-width: 200px;">
-        <li><strong>Tem certeza?</strong></li>
-        <li class="mt-2 d-flex justify-content-between">
-          <%= link_to "Sim", task_path(task), class: "btn btn-secondary btn-sm", data: { turbo_method: :delete }, style: "display: flex; gap: 5px;" %>
-          <%= link_to "Não", "#", class: "btn btn-secondary btn-sm", data: { bs_toggle: "dropdown" } %>
-        </li>
+        <ul class="dropdown-menu p-3" style="min-width: 300px;">
+        <div style="display: flex; font-size: small; align-items: center;">
+          <%= image_tag "info.png", alt: "info", style: "height: 25px; width: 25px;" %>
+          <li style="margin-right: 5px"><strong>Deseja excluir?</strong></li>
+          <li>
+            <div style="display: flex;">
+              <div class="imagem-container" style="background-color: #d8d8d8ff; height: 30px; width: 30px; display: flex; justify-content: center; align-items: center;">
+                <%= image_tag "yes.png", alt: "info", style: "height: 25px; width: 25px;" %>
+              </div>
+              <%= link_to "Sim", task_path(task), data: { turbo_method: :delete }, style: "display: flex; text-decoration: none; color: black; border: 1px solid black; padding: 2px; margin-right: 5px" %>
+            </div>
+          </li>
+          <li>
+            <div style="display: flex;">
+              <div class="imagem-container" style="background-color: #d8d8d8ff; height: 30px; width: 30px; display: flex; justify-content: center; align-items: center;">
+                  <%= image_tag "no.png", alt: "info", style: "height: 25px; width: 25px;" %>
+              </div>
+              <%= link_to "Não", "#", data: { bs_toggle: "dropdown" }, style: "display: flex; text-decoration: none; color: black; border: 1px solid black; padding: 2px" %>
+            </div>
+          </li>
+        </div>
       </ul>
       <% end %>
     </div>
-    <div id="save">
-      <%= form.button type: "submit", style: "background: none; border: none; display: flex;" do %>
-        <%= image_tag "save.png", alt: "save", style: "height: 25px; width: 25px;" %>
-        <p>Salvar</p>
-      <% end %>
+    <div id="save" style="display: flex; justify-content: flex-end;">
+      <div class="imagem-container" style="background-color: #00a223ff; height: 30px; width: 30px; display: flex; justify-content: center; align-items: center;">
+        <%= form.button type: "submit", style: "background: none; border: none; display: flex;" do %>
+          <%= image_tag "save.png", alt: "save", style: "height: 25px; width: 25px;" %>
+          
+        <% end %>
+      </div>
+      <p style="border: 1px solid black;">Salvar</p>
     </div>
   </div>
 <% end %>

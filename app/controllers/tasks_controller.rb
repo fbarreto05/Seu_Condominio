@@ -27,7 +27,7 @@ class TasksController < ApplicationController
       if @task.save
         Commentary.create(
           name: "Fulana",
-          text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et massa nec enim congue malesuada et nec nunc. Integer pharetra interdum sapien nec feugiat. Ut mattis felis a accumsan dignissim. Aliquam cursus urna lacus, id egestas sem varius sit amet. Donec bibendum risus eu bibendum scelerisque. Aliquam placerat tristique est. Ut sed ultricies erat. Suspendisse non eleifend risus, nec luctus ipsum. Pellentesque rhoncus odio vitae fermentum tempor. Nam ac faucibus tortor. Praesent pellentesque augue vitae ligula iaculis, a accumsan eros maximus. In ut ipsum magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut a eleifend quam. Nulla facilisi.",
+          text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et massa nec enim congue malesuada et nec nunc. Integer pharetra interdum sapien nec feugiat.",
           date: Date.today,
           task_id: @task.id
         )
