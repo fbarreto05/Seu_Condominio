@@ -109,7 +109,7 @@
                         aria-controls="collapse<%= task.id %>">
                   <%= task.name %>
                 </button>
-                <button type="button" style="box-shadow: 0 4px 6px rgba(0,0,0,0.3); border-radius: 5px; background: none; border: none; border: 1px solid black; " data-bs-toggle="modal" data-bs-target="#editTaskModal_<%= task.id %>">
+                <button type="button" class="edit-btn" style="box-shadow: 0 4px 6px rgba(0,0,0,0.3); border-radius: 5px; background: none; border: none; border: 1px solid black; " data-bs-toggle="modal" data-bs-target="#editTaskModal_<%= task.id %>">
                     <%= image_tag "edit.png", alt: "logo", style: "height: 25px; width: 25px; vertical-align: baseline;" %>
                 </button>
               </h2>
@@ -162,7 +162,7 @@
                     <% end %>
                       <% commentaries.each_with_index do |commentary, index| %>
                         <%= turbo_frame_tag dom_id(commentary) do %>
-                          <div class="comment <%= 'hidden-comment' if index >= 2 %>">
+                          <div id="commentary_<%= commentary.id %>" class="comment <%= 'hidden-comment' if index >= 2 %>">
                             <div style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); display: block; text-align: left; margin-bottom: 1rem;">
                               <div style="display:flex; align-items: flex-start; gap: 10px;">
                                 

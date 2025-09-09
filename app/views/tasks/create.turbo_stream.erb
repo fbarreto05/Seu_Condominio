@@ -51,44 +51,45 @@
                     <%= image_tag "commentary.png", alt: "logo", style: "height: 25px; width: 25px;" %>
                     <p>Comentários</p>
                   </div>
-                  
 
-                  <div id="comments-container" style="align-items: center">
+                  <div id="comments-container-<%= @task.id %>" style="align-items: center">
                     
                     <% commentaries = Commentary.where(task_id: @task.id) %>
                     <% if commentaries.size > 0 %> 
                       <br>
                     <% end %>
-                    <% commentaries.each_with_index do |commentary, index| %>
-                      <div class="comment <%= 'hidden-comment' if index >= 2 %>">
-                        <div style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); display: block; text-align: left; margin-bottom: 1rem;">
-                          <div style="display:flex; align-items: flex-start; gap: 10px;">
-                            
-                            <div>
-                              <%= image_tag "user.png", alt: "logo", style: "height: 75px; width: 75px;" %>
-                            </div>
+                      <% commentaries.each_with_index do |commentary, index| %>
+                        <%= turbo_frame_tag dom_id(commentary) do %>
+                          <div class="comment <%= 'hidden-comment' if index >= 2 %>">
+                            <div style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); display: block; text-align: left; margin-bottom: 1rem;">
+                              <div style="display:flex; align-items: flex-start; gap: 10px;">
+                                
+                                <div>
+                                  <%= image_tag "user.png", alt: "logo", style: "height: 75px; width: 75px;" %>
+                                </div>
 
-                            <div style="width: 100%;">
-                              <div id="delete" style="display: flex; justify-content: space-between; align-items: center;">
-                                <p style="color:#007AA2; margin: 0;"><%= commentary.name %></p>
-                                <%= link_to commentary_path(commentary), class: "btn btn-secondary btn-sm", data: { turbo_method: :delete }, style: "display: flex; background: none; border: none; gap: 5px;" do %>
-                                  <div class="imagem-container" style="box-shadow: 0 4px 6px rgba(0,0,0,0.3); background-color: #d8d8d8ff; height: 30px; width: 30px; display: flex; justify-content: center; align-items: center;">
-                                    <%= image_tag "trash.png", alt: "delete", style: "height: 25px; width: 25px;" %>
+                                <div style="width: 100%;">
+                                  <div id="delete" style="display: flex; justify-content: space-between; align-items: center;">
+                                    <p style="color:#007AA2; margin: 0;"><%= commentary.name %></p>
+                                    <%= link_to commentary_path(commentary), class: "btn btn-secondary btn-sm", data: { turbo_method: :delete }, style: "display: flex; background: none; border: none; gap: 5px;" do %>
+                                      <div class="imagem-container" style="box-shadow: 0 4px 6px rgba(0,0,0,0.3); background-color: #d8d8d8ff; height: 30px; width: 30px; display: flex; justify-content: center; align-items: center;">
+                                        <%= image_tag "trash.png", alt: "delete", style: "height: 25px; width: 25px;" %>
+                                      </div>
+                                      
+                                    <% end %>
                                   </div>
-                                  
-                                <% end %>
+
+                                  <p style="word-wrap: break-word; overflow-wrap: break-word; margin: 5px 0; width: 70%">
+                                    <%= commentary.text %>
+                                  </p>
+
+                                  <p style="color:#007AA2; font-size: small; margin: 0;">Comentado em: <%= commentary.date %></p>
+                                </div>
                               </div>
-
-                              <p style="word-wrap: break-word; overflow-wrap: break-word; margin: 5px 0; width: 70%">
-                                <%= commentary.text %>
-                              </p>
-
-                              <p style="color:#007AA2; font-size: small; margin: 0;">Comentado em: <%= commentary.date %></p>
+                              <hr style="margin-top: 10px;"/>
                             </div>
                           </div>
-                          <hr style="margin-top: 10px;"/>
-                        </div>
-                      </div>
+                        <% end %>
                     <% end %>
 
                     <div style="display: flex; justify-content: center">
@@ -117,7 +118,18 @@
                 </div>
               </div>
             </div>
-<% end %>
 
-<%= turbo_stream.update "new_task" do %>
+            <div class="modal fade" id="editTaskModal_<%= @task.id %>">
+            <div class="modal-dialog modal-dialog-centered" style="width: 95%">
+              <div class="modal-content">
+                <div class="modal-header" style="gap: 5px; background-color: #d8d8d8ff; display: flex; justify-content: flex-start;">
+                  <%= image_tag "down_chevron.png", alt: "down_chevron", style: "height: 15px; width: 25px;" %>
+                  <h5 class="modal-title" id="newTaskModalLabel">Editar Tarefa</h5>
+                </div>
+                <div class="modal-body">
+                  <%= render 'form', task: @task %>
+                </div>
+              </div>
+            </div>
+          </div>
 <% end %>
