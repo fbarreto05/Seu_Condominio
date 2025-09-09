@@ -33,6 +33,7 @@
         color: white;
         font-size: 14px;
         background: #007AA2;
+        background: linear-gradient(to top, #005f7a, #00CFFF); 
         padding: 6px 10px;     
         border-radius: 0 4px 4px 0; 
         
@@ -72,10 +73,10 @@
         
       </div>
       <div style="display: flex;">
-        <div class="imagem-container" style="background-color: #007AA2; height: 30px; width: 30px; display: flex; justify-content: center; align-items: center;">
-            <p style="color: white">R$</p>
+        <div class="imagem-container" style=" background: linear-gradient(to top, #005f7a, #00CFFF); background-color: #007AA2; height: 30px; width: 30px; display: flex; justify-content: center; align-items: center; border-top-right-radius: 0px; border-bottom-right-radius: 0px;">
+            <p style="color: white;">R$</p>
         </div>
-        <%= form.text_field :estimated_cost, style: "background-color: #d8d8d8ff;  margin-bottom: 50px; width: 50%;" %>
+        <%= form.text_field :estimated_cost, style: "background-color: #d8d8d8ff;  margin-bottom: 50px; width: 50%;  border-top-left-radius: 0px; border-bottom-left-radius: 0px;" %>
       </div>
     </div>
   
@@ -90,27 +91,27 @@
   </div>
 
   <div style="display: flex; justify-content: flex-end; gap:2px;">
-    <div id="back" style="display: flex;">
-      <div class="imagem-container" style="background-color: #007AA2; height: 30px; width: 30px; display: flex; justify-content: center; align-items: center;">
+    <div id="back" style="display: flex; ">
+      <div class="imagem-container" style="box-shadow: 0 4px 6px rgba(0,0,0,0.3);  background: linear-gradient(to top, #005f7a, #00CFFF);  background-color: #007AA2; height: 30px; width: 30px; display: flex; justify-content: center; align-items: center; border-top-right-radius: 0px; border-bottom-right-radius: 0px;">
         <button type="button" style="display: flex; background: none; border: none;" data-bs-dismiss="modal">
-          <%= image_tag "back.png", alt: "back", style: "height: 25px; width: 25px;" %>
+          <%= image_tag "back.png", alt: "back", style: "box-shadow: 0 4px 6px rgba(0,0,0,0.3); height: 25px; width: 25px; border-top-right-radius: 0px; border-bottom-right-radius: 0px;" %>
         </button>
       </div>
-      <p style="border: 1px solid black;">Voltar</p>
+      <p style="box-shadow: 0 4px 6px rgba(0,0,0,0.3); border: 1px solid black; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">Voltar</p>
     </div>
     <div class="btn-group">
       <% if task.persisted? %>
-        <div id="delete" data-bs-toggle="dropdown" aria-expanded="false" style="display: flex;">
-          <div class="imagem-container" style="background-color: #dd2d01ff; height: 30px; width: 30px; display: flex; justify-content: center; align-items: center;">
+        <div id="delete" data-bs-toggle="dropdown" aria-expanded="false" style="display: flex; border-top-right-radius: 0px; border-bottom-right-radius: 0px;">
+          <div class="imagem-container" style="box-shadow: 0 4px 6px rgba(0,0,0,0.3);  background: linear-gradient(to top, #c90000ff, #e40303ff);  background-color: #dd2d01ff; height: 30px; width: 30px; display: flex; justify-content: center; align-items: center; border-top-right-radius: 0px; border-bottom-right-radius: 0px;">
             <button type="button" style="display: flex; background: none; border: none;">
-              <%= image_tag "trash.png", alt: "delete", style: "height: 25px; width: 25px;" %>
+              <%= image_tag "trash.png", alt: "delete", style: "height: 25px; width: 25px; border-top-right-radius: 0px; border-bottom-right-radius: 0px;" %>
             </button>
           </div>
-            <p style="border: 1px solid black;">Deletar</p>
+            <p style="box-shadow: 0 4px 6px rgba(0,0,0,0.3); border: 1px solid black; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">Deletar</p>
         </div>
 
         <ul class="dropdown-menu p-3" style="min-width: 300px;">
-        <div style="display: flex; font-size: small; align-items: center;">
+        <div style="display: flex; font-size: small; align-items: center; ">
           <%= image_tag "info.png", alt: "info", style: "height: 25px; width: 25px;" %>
           <li style="margin-right: 5px"><strong>Deseja excluir?</strong></li>
           <li>
@@ -134,13 +135,12 @@
       <% end %>
     </div>
     <div id="save" style="display: flex; justify-content: flex-end;">
-      <div class="imagem-container" style="background-color: #00a223ff; height: 30px; width: 30px; display: flex; justify-content: center; align-items: center;">
+      <div class="imagem-container" style="box-shadow: 0 4px 6px rgba(0,0,0,0.3); background: linear-gradient(to top, #38c700ff, #2ea300ff);  background-color: #00a223ff; height: 30px; width: 30px; display: flex; justify-content: center; align-items: center; border-top-right-radius: 0px; border-bottom-right-radius: 0px;">
         <%= form.button type: "submit", style: "background: none; border: none; display: flex;" do %>
-          <%= image_tag "save.png", alt: "save", style: "height: 25px; width: 25px;" %>
-          
+          <%= image_tag "save.png", alt: "save", style: "height: 25px; width: 25px; border-top-right-radius: 0px; border-bottom-right-radius: 0px;" %>
         <% end %>
       </div>
-      <p style="border: 1px solid black;">Salvar</p>
+      <p style="box-shadow: 0 4px 6px rgba(0,0,0,0.3); border: 1px solid black; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">Salvar</p>
     </div>
   </div>
 <% end %>

@@ -10,7 +10,20 @@
       padding: 0;
       p
       {
-        margin-bottom: 0px
+        margin-bottom: 0px;
+        border-radius: 5px;
+      }
+      div, label
+      {
+        border-radius: 5px;
+      }
+      img
+      {
+        border-radius: 5px;
+      }
+      input, select
+      {
+        border-radius: 5px;
       }
     }
   
@@ -38,7 +51,7 @@
   }
 </style>
 
-<div id="header" style="display: flex; background-color: #007AA2; justify-content: space-between; padding: 10px; align-items: center;">
+<div id="header" style="border-radius: 0px; background: linear-gradient(to top, #005f7a, #00CFFF); display: flex; background-color: #007AA2; justify-content: space-between; padding: 10px; align-items: center;">
   <div id="main_control" style="display: flex;">
     <a href="#"><%= image_tag "sidebar.png", alt: "sidebar", style: "height: 50px; width: 50px;" %></a>
     <a href="#"><%= image_tag "logo.png", alt: "logo",  style: "height: 50px; width: 100px;" %></a>
@@ -46,7 +59,7 @@
   <div id="user_area">
     <div id="profile" style="display: flex; align-items: center; justify-content: right; gap: 5px;">
       <p style=" margin: 0px; font-size:small; color: white;">Rogerio</p>
-      <p style=" margin: 0px; font-size:small; background-color: #d30000ff; color: white;">Sair</p>
+      <p style=" margin: 0px; font-size:small; background: linear-gradient(to top, #c90000ff, #e40303ff);  background-color: #d30000ff; color: white;">Sair</p>
     </div>
     <div id="search_bar" style="display: flex; align-items: center; gap: 5px; margin-top: 10px;">
       <div id="search_bar_square" style="background-color: white; height: 19.5px; width: 19.5px;"></div>
@@ -57,12 +70,12 @@
 </div>
 
 <div id="register" style="display: flex; margin-top: 10px; justify-content: flex-end;">
-  <div class="imagem-container" style="background-color: #007AA2; height: 30px; width: 30px; display: flex; justify-content: center; align-items: center;">
-    <button type="button" style="background: none; border: none; padding: 0px" data-bs-toggle="modal" data-bs-target="#newTaskModal">
+  <div class="imagem-container" style="box-shadow: 0 4px 6px rgba(0,0,0,0.3); background: linear-gradient(to top, #005f7a, #00CFFF); background-color: #007AA2; height: 30px; width: 30px; display: flex; justify-content: center; align-items: center; border-top-right-radius: 0px; border-bottom-right-radius: 0px;">
+    <button type="button" style="box-shadow: 0 4px 6px rgba(0,0,0,0.3); background: none; border: none; padding: 0px" data-bs-toggle="modal" data-bs-target="#newTaskModal">
       <%= image_tag "plus_sign.png", alt: "logo", style: "padding: 3px; height: 25px; width: 25px;" %>
     </button>
   </div>
-  <p style="margin-right: 10px; background-color:white; padding: 3px;">Cadastrar Tarefa</p>
+  <p style="box-shadow: 0 4px 6px rgba(0,0,0,0.3); margin-right: 10px; background-color:white; padding: 3px; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">Cadastrar Tarefa</p>
 </div>
 
 <div class="modal fade" id="newTaskModal">
@@ -82,11 +95,11 @@
 
 <br>
 <div style=" justify-content:center; display: flex;">
-  <div class="accordion" id="tasksAccordion" style=" width: 95%;">
-    <div id="tasks" style=" width: 95%;">
+  <div class="accordion" id="tasksAccordion" style="box-shadow: 0 4px 6px rgba(0,0,0,0.3); width: 95%;">
+    <div id="tasks" style=" width: 100%;">
       <% @tasks.each do |task| %>
         <div class="accordion-item">
-          <h2 class="accordion-header" style=" width: 100%; display: flex; background-color: #d8d8d8ff;"; id="heading<%= task.id %>">
+          <h2 class="accordion-header" style="box-shadow: 0 4px 6px rgba(0,0,0,0.3); width: 100%; display: flex; background-color: #d8d8d8ff;"; id="heading<%= task.id %>">
             <button class="accordion-button collapsed" type="button" style="border: 1px solid black; background-color: #d8d8d8ff;"
                     data-bs-toggle="collapse" 
                     data-bs-target="#collapse<%= task.id %>" 
@@ -94,7 +107,7 @@
                     aria-controls="collapse<%= task.id %>">
               <%= task.name %>
             </button>
-            <button type="button" style="background: none; border: none; border: 1px solid black; " data-bs-toggle="modal" data-bs-target="#editTaskModal_<%= task.id %>">
+            <button type="button" style="box-shadow: 0 4px 6px rgba(0,0,0,0.3); border-radius: 5px; background: none; border: none; border: 1px solid black; " data-bs-toggle="modal" data-bs-target="#editTaskModal_<%= task.id %>">
                 <%= image_tag "edit.png", alt: "logo", style: "height: 25px; width: 25px; vertical-align: baseline;" %>
             </button>
           </h2>
@@ -102,17 +115,17 @@
               class="accordion-collapse collapse" 
               aria-labelledby="heading<%= task.id %>" 
               data-bs-parent="#tasksAccordion">
-            <div class="accordion-body" style="width: 100%; padding-top: 1rem;padding-right: 0rem;padding-bottom: 1rem;padding-left: 0rem;">
+            <div class="accordion-body" style="box-shadow: 0 4px 6px rgba(0,0,0,0.3); width: 100%; padding-top: 1rem;padding-right: 0rem;padding-bottom: 1rem;padding-left: 0rem;">
               
               <div id="date" style="display: flex; justify-content: center;">
                 <div>
-                  <p style="padding: 10px; display: block; color: #007AA2; text-align: center; background-color: #d8d8d8ff; border: 1px solid black;">Início</p>
-                  <p style="padding: 10px; display: block; color: #007AA2; text-align: center; background-color: #d8d8d8ff; border: 1px solid black;"><%= task.beginning %></p>
+                  <p style="box-shadow: 0 4px 6px rgba(0,0,0,0.3); padding: 10px; display: block; color: #007AA2; text-align: center; background-color: #d8d8d8ff; border: 1px solid black;">Início</p>
+                  <p style="box-shadow: 0 4px 6px rgba(0,0,0,0.3); padding: 10px; display: block; color: #007AA2; text-align: center; background-color: #d8d8d8ff; border: 1px solid black;"><%= task.beginning %></p>
                 </div>
 
                 <div>
-                  <p style="padding: 10px; display: block; color: #007AA2; text-align: center; background-color: #d8d8d8ff; border: 1px solid black;">Conclusão</p>
-                  <p style="padding: 10px; display: block; color: #007AA2; text-align: center; background-color: #d8d8d8ff; border: 1px solid black;"><%= task.end %></p>
+                  <p style="box-shadow: 0 4px 6px rgba(0,0,0,0.3); padding: 10px; display: block; color: #007AA2; text-align: center; background-color: #d8d8d8ff; border: 1px solid black;">Conclusão</p>
+                  <p style="box-shadow: 0 4px 6px rgba(0,0,0,0.3); padding: 10px; display: block; color: #007AA2; text-align: center; background-color: #d8d8d8ff; border: 1px solid black;"><%= task.end %></p>
                 </div>
               </div>
               <br>
@@ -133,7 +146,7 @@
               </div>
 
               <br>
-              <div style="background-color: #d8d8d8ff; height: 50px; width: 100%; display: flex; gap: 10px; align-items: center;">
+              <div style="padding: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);  background-color: #d8d8d8ff; height: 50px; width: 100%; display: flex; gap: 10px; align-items: center;">
                 <%= image_tag "commentary.png", alt: "logo", style: "height: 25px; width: 25px;" %>
                 <p>Comentários</p>
               </div>
@@ -142,7 +155,7 @@
                 <% commentaries = Commentary.where(task_id: task.id) %>
                 <% commentaries.each_with_index do |commentary, index| %>
                   <div class="comment <%= 'hidden-comment' if index >= 2 %>">
-                    <div style="display: block; text-align: left; margin-bottom: 1rem;">
+                    <div style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); display: block; text-align: left; margin-bottom: 1rem;">
                       <div style="display:flex; align-items: flex-start; gap: 10px;">
                         
                         <div>
@@ -153,7 +166,7 @@
                           <div id="delete" style="display: flex; justify-content: space-between; align-items: center;">
                             <p style="color:#007AA2; margin: 0;"><%= commentary.name %></p>
                             <%= link_to commentary_path(commentary), class: "btn btn-secondary btn-sm", data: { turbo_method: :delete }, style: "display: flex; background: none; border: none; gap: 5px;" do %>
-                              <div class="imagem-container" style="background-color: #d8d8d8ff; height: 30px; width: 30px; display: flex; justify-content: center; align-items: center;">
+                              <div class="imagem-container" style="box-shadow: 0 4px 6px rgba(0,0,0,0.3); background-color: #d8d8d8ff; height: 30px; width: 30px; display: flex; justify-content: center; align-items: center;">
                                 <%= image_tag "trash.png", alt: "delete", style: "height: 25px; width: 25px;" %>
                               </div>
                               
@@ -174,10 +187,10 @@
 
                 <div style="display: flex; justify-content: center">
                   <% if commentaries.size > 2 %> 
-                    <button id="show-more-comments" class="btn btn-primary" style="background-color: #33b400ff">
+                    <button id="show-more-comments" class="btn btn-primary" style="background: linear-gradient(to top, #38c700ff, #2ea300ff);  box-shadow: 0 4px 6px rgba(0,0,0,0.3); background-color: #33b400ff">
                       <div style="display: flex; justify-content: center; align-items: center">
                         Ver Mais Comentários
-                        <div id="show-more-comments" class="imagem-container" style="background-color: #33b400ff; height: 38px; width: 38px; display: flex; justify-content: center; align-items: center;">
+                        <div id="show-more-comments" class="imagem-container" style="background: linear-gradient(to top, #38c700ff, #2ea300ff);  background-color: #33b400ff; height: 38px; width: 38px; display: flex; justify-content: center; align-items: center;">
                             <%= image_tag "down_arrow.png", alt: "logo", style: "padding: 3px; height: 30px; width: 30px;" %>
                         </div>
                       </div>
