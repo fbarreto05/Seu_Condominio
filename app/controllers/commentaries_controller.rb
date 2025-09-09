@@ -55,6 +55,7 @@ class CommentariesController < ApplicationController
     @commentary.destroy!
 
     respond_to do |format|
+      format.turbo_stream
       format.html { redirect_to tasks_path, notice: "Commentary was successfully destroyed.", status: :see_other }
       format.json { head :no_content }
     end
